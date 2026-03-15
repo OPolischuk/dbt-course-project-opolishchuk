@@ -1,0 +1,19 @@
+# Секрети
+profiles.yml
+.env
+*.env
+
+# Віртуальне середовище
+venv/
+
+# Папка зі встановлювачем dbt (яку ми не хочемо пушити)
+dbt/
+
+# dbt артефакти
+**/target/
+**/dbt_packages/
+**/logs/
+
+# IDE
+.vscode/
+.idea/

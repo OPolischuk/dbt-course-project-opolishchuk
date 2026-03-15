@@ -1,0 +1,22 @@
+[sqlfluff]
+# dialect
+dialect = snowflake
+# dbt macros (Jinja)
+templater = dbt
+# max length line
+max_line_length = 80
+
+[sqlfluff:templater:dbt]
+# path to file dbt_project.yml
+project_dir = ./dbt_course_project
+# path to profile
+profiles_dir = ~/.dbt
+
+[sqlfluff:indentation]
+
+indent_unit = space
+tab_width = 4
+
+[sqlfluff:rules:capitalisation.keywords]
+
+capitalisation_policy = upper

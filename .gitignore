@@ -1,15 +1,15 @@
-# Секрети
+# secretes
 profiles.yml
 .env
 *.env
 
-# Віртуальне середовище
+# virtual env
 venv/
 
-# Папка зі встановлювачем dbt (яку ми не хочемо пушити)
+# folder with setup
 dbt/
 
-# dbt артефакти
+# dbt artifacts
 **/target/
 **/dbt_packages/
 **/logs/

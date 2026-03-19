@@ -1,0 +1,48 @@
+version: 2
+
+sources:
+  - name: snowflake_raw
+    description: "This database contains raw HR data imported from the source system."
+    database: DBT_PROJECT
+    schema: RAW
+    loaded_at_field: "TO_TIMESTAMP(_UPDATED_MICROS::bigint / 1000000)"
+
+    tables:
+      # PASS
+      - name: candidates
+        description: "Table containing personal details of job applicants."
+        freshness:
+          warn_after:
+            count: 1000
+            period: day
+          error_after:
+            count: 2000
+            period: day
+
+      # WARNING
+      - name: employees
+        description: "Records of current and former staff members."
+        freshness:
+          warn_after:
+            count: 1
+            period: hour
+          error_after:
+            count: 1000
+            period: day
+
+      # FAIL
+      - name: interviews
+        description: "Details of scheduled and completed job interviews."
+        freshness:
+          warn_after:
+            count: 1
+            period: minute
+          error_after:
+            count: 2
+            period: minute
+
+      - name: job_functions
+        description: "Reference table defining various job roles."
+
+      - name: skills
+        description: "A list of technical and soft skills."

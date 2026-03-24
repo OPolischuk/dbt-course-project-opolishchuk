@@ -1,0 +1,12 @@
+version: 2
+
+seeds:
+  - name: columns_mapping
+    description: "Mapping configuration to automate renaming and casting of raw HR data."
+    config:
+      column_types:
+        raw_table_name: varchar(255)
+        raw_column_name: varchar(255)
+        target_column_name: varchar(255)
+        target_data_type: varchar(50)
+        target_order_num: integer

@@ -15,8 +15,13 @@ final AS (
         stg.status,
         stg.interviewer_id AS interviewer_offset,
         stg.location,
+        stg.is_logged,
+        stg.is_media_available,
         stg.run_type,
         stg.interview_type AS type,
+        stg.media_status,
+
+
 
         -- pivot
         stg.created_at AS created_datetime,

@@ -8,9 +8,9 @@ unit_tests:
       - input: ref('stg_interviews')
         rows:
           - {interview_id: 1, run_type: 'online', updated_at: '2026-01-01 12:00:00'}
-      - input: ref('dim_candidates')
+      - input: ref('stg_candidates')
         rows:
-          - {id: 101, job_function_id: 201, english_level: 'B2', staffing_status: 'Active'}
+          - {candidate_id: 101, job_function_id: 201, english_level: 'B2', staffing_status: 'Active'}
       - input: ref('dim_job_functions')
         rows:
           - {id: 201, base_name: 'Engineer', category: 'IT'}

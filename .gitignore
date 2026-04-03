@@ -13,6 +13,7 @@ dbt/
 **/target/
 **/dbt_packages/
 **/logs/
+**/edr_target/
 
 # IDE
 .vscode/

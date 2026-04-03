@@ -34,7 +34,7 @@ final AS (
         calc.cancelled_datetime,
         cand.english_level,
         cand.staffing_status,
-        jobs.base_name,
+        jobs.job_function_name AS base_name,
         jobs.category,
         CAST(stg.created_at AS DATE) AS created_date,
 
@@ -70,10 +70,15 @@ final AS (
         ON
             calc.candidate_id = cand.candidate_id
             AND stg.created_at >= cand.valid_from_datetime
-            AND stg.created_at < cand.valid_to_datetime
+            AND stg.created_at
+            < COALESCE(cand.valid_to_datetime, CAST ('9999-12-31' AS TIMESTAMP))
 
-    LEFT JOIN {{ ref('dim_job_functions') }} AS jobs
-        ON cand.job_function_id = jobs.id
+    LEFT JOIN {{ ref('stg_job_functions') }} AS jobs
+        ON
+            cand.job_function_id = jobs.job_function_id
+            AND stg.created_at >= jobs.valid_from_datetime
+            AND stg.created_at
+            < COALESCE(jobs.valid_to_datetime, CAST ('9999-12-31' AS TIMESTAMP))
 
     QUALIFY
         ROW_NUMBER() OVER (PARTITION BY calc.id ORDER BY stg.updated_at DESC)

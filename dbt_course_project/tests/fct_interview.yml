@@ -7,7 +7,12 @@ unit_tests:
           - {id: 1, candidate_id: 101, started_datetime: '2026-01-01 10:00:00', feedback_provided_datetime: '2026-01-01 11:00:00'}
       - input: ref('stg_interviews')
         rows:
-          - {interview_id: 1, run_type: 'online', updated_at: '2026-01-01 12:00:00'}
+          - {
+              interview_id: 1,
+              run_type: 'online',
+              updated_at: '2026-01-01 12:00:00',
+              created_at: '2026-01-01 10:00:00'
+            }
       - input: ref('stg_candidates')
         rows:
           - {
@@ -18,9 +23,15 @@ unit_tests:
               valid_from_datetime: '2026-01-01 00:00:00',
               valid_to_datetime: '2099-01-01 00:00:00'
             }
-      - input: ref('dim_job_functions')
+      - input: ref('stg_job_functions')
         rows:
-          - {id: 201, base_name: 'Engineer', category: 'IT'}
+          - {
+              job_function_id: 201,
+              job_function_name: 'Engineer',
+              category: 'IT',
+              valid_from_datetime: '2026-01-01 00:00:00',
+              valid_to_datetime: '2099-01-01 00:00:00'
+            }
     expect:
       rows:
         - {id: 1, interview_duration: 60}

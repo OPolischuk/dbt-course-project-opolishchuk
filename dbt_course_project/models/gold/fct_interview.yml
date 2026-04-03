@@ -1,0 +1,8 @@
+models:
+  - name: fct_interview
+    description: "{{ doc('fct_interview') }}"
+    columns:
+      - name: interview_duration
+        description: "{{ doc('interview_duration') }}"
+      - name: staffing_status
+        description: "{{ doc('candidate_staffing_status') }}"

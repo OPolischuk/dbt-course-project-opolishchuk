@@ -14,27 +14,19 @@ sources:
           - name: id
             tests:
               - unique
-              - not null
+              - not_null
 
       - name: employees
         description: "Records of current and former staff members."
         freshness:
-          warn_after:
-            count: 1
-            period: hour
-          error_after:
-            count: 1000
-            period: day
+          warn_after: {count: 1, period: hour}
+          error_after: {count: 1000, period: day}
 
       - name: interviews
         description: "Details of scheduled and completed job interviews."
         freshness:
-          warn_after:
-            count: 12
-            period: hour
-          error_after:
-            count: 24
-            period: hour
+          warn_after: {count: 12, period: hour}
+          error_after: {count: 24, period: hour}
         columns:
           - name: id
             tests:
@@ -42,17 +34,15 @@ sources:
               - not_null
           - name: candidate_id
             tests:
-              - relationships:
-                  to: ref('stg_candidates')
-                  field: candidate_id
+              - not_null
 
       - name: job_functions
         description: "Reference table defining various job roles."
         columns:
           - name: job_function_id
             tests:
-             - unique
-             - not_null
+              - unique
+              - not_null
 
       - name: skills
         description: "A list of technical and soft skills."

@@ -1,0 +1,20 @@
+models:
+  - name: stg_interviews
+    columns:
+      - name: status
+        tests:
+          - accepted_values:
+              values: ['SCHEDULED', 'IN_PROGRESS', 'PENDING_FEEDBACK', 'COMPLETED', 'CANCELLED']
+
+      - name: interview_type
+        tests:
+          # check format
+          - dbt_expectations.expect_column_values_to_match_regex:
+              regex: '(?i)^(online|offline)$'
+
+  - name: stg_candidates
+    columns:
+      - name: english_level
+        tests:
+          # Community test: check the empty rows
+          - dbt_utils.not_empty_string

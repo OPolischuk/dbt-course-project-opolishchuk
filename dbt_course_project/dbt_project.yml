@@ -33,6 +33,8 @@ models:
   dbt_course_project:
     example:
       +materialized: view
+    elementary:
+      +schema: elementary
 
     # Layer 1: Staging (Bronze)
     staging:
@@ -48,3 +50,6 @@ models:
     gold:
       +schema: mart
       +materialized: table
+      +required_tests:
+        unique: 1
+        not_null: 1

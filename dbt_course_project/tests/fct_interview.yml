@@ -1,0 +1,19 @@
+unit_tests:
+  - name: test_interview_duration_logic
+    model: fct_interview
+    given:
+      - input: ref('int_interviews_pivoted')
+        rows:
+          - {id: 1, candidate_id: 101, started_datetime: '2026-01-01 10:00:00', feedback_provided_datetime: '2026-01-01 11:00:00'}
+      - input: ref('stg_interviews')
+        rows:
+          - {interview_id: 1, run_type: 'online', updated_at: '2026-01-01 12:00:00'}
+      - input: ref('dim_candidates')
+        rows:
+          - {id: 101, job_function_id: 201, english_level: 'B2', staffing_status: 'Active'}
+      - input: ref('dim_job_functions')
+        rows:
+          - {id: 201, base_name: 'Engineer', category: 'IT'}
+    expect:
+      rows:
+        - {id: 1, interview_duration: 60}

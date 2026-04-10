@@ -5,3 +5,4 @@ WITH base AS (
 )
 
 SELECT * FROM base
+WHERE length(job_function_id) = 19

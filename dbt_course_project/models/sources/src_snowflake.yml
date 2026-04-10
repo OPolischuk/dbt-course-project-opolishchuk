@@ -11,7 +11,7 @@ sources:
       - name: candidates
         description: "Table containing personal details of job applicants."
         columns:
-          - name: id
+          - name: candidate_id
             tests:
               - unique
               - not_null
@@ -35,6 +35,9 @@ sources:
           - name: candidate_id
             tests:
               - not_null
+              - relationships:
+                  to: source('snowflake_raw', 'candidates')
+                  field: candidate_id
 
       - name: job_functions
         description: "Reference table defining various job roles."

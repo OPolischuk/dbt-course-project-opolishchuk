@@ -4,13 +4,18 @@ models:
       - name: status
         tests:
           - accepted_values:
-              values: ['SCHEDULED', 'IN_PROGRESS', 'PENDING_FEEDBACK', 'COMPLETED', 'CANCELLED']
+              values: ['SCHEDULED', 'IN_PROGRESS', 'PENDING_FEEDBACK', 'COMPLETED', 'CANCELLED', 'REQUESTED', 'DRAFT']
 
-      - name: interview_type
+      - name: run_type
         tests:
           # check format
           - dbt_expectations.expect_column_values_to_match_regex:
               regex: '^(online|offline|ONLINE|OFFLINE)$'
+
+      - name: interview_type
+        tests:
+          - accepted_values:
+              values: ['Technical', 'Project']
 
   - name: stg_candidates
     columns:
@@ -18,3 +23,24 @@ models:
         tests:
           # Community test: check the empty rows
           - dbt_utils.not_empty_string
+
+  - name: stg_job_functions
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - job_function_id
+            - updated_at
+    columns:
+      - name: job_function_id
+        tests:
+          - dbt_expectations.expect_column_value_lengths_to_equal:
+              arguments:
+                value: 19
+
+  - name: stg_skills
+    columns:
+      - name: skill_id
+        tests:
+          - dbt_expectations.expect_column_value_lengths_to_equal:
+              arguments:
+                value: 19

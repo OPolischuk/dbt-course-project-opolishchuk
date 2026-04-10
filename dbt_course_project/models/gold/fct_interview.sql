@@ -71,14 +71,14 @@ final AS (
             calc.candidate_id = cand.candidate_id
             AND stg.created_at >= cand.valid_from_datetime
             AND stg.created_at
-            < COALESCE(cand.valid_to_datetime, CAST ('9999-12-31' AS TIMESTAMP))
+            < COALESCE(cand.valid_to_datetime, CAST('9999-12-31' AS TIMESTAMP))
 
     LEFT JOIN {{ ref('stg_job_functions') }} AS jobs
         ON
             cand.job_function_id = jobs.job_function_id
             AND stg.created_at >= jobs.valid_from_datetime
             AND stg.created_at
-            < COALESCE(jobs.valid_to_datetime, CAST ('9999-12-31' AS TIMESTAMP))
+            < COALESCE(jobs.valid_to_datetime, CAST('9999-12-31' AS TIMESTAMP))
 
     QUALIFY
         ROW_NUMBER() OVER (PARTITION BY calc.id ORDER BY stg.updated_at DESC)

@@ -1,8 +1,17 @@
+version: 2
+
 models:
   - name: fct_interview
     description: "{{ doc('fct_interview') }}"
     columns:
       - name: interview_duration
         description: "{{ doc('interview_duration') }}"
+
+      - name: feedback_delay
+        description: "{{ doc('interview_feedback_delay') }}"
+
       - name: staffing_status
         description: "{{ doc('candidate_staffing_status') }}"
+
+      - name: candidate_offset
+        description: "{{ doc('interview_point_in_time_join') }}"

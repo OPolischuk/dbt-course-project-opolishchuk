@@ -5,3 +5,7 @@ WITH base AS (
 )
 
 SELECT * FROM base
+QUALIFY ROW_NUMBER() OVER (
+    PARTITION BY candidate_id
+    ORDER BY _updated_at DESC
+) = 1

@@ -8,8 +8,8 @@ sources:
     tables:
       - name: candidates
         description: "Table containing personal details of job applicants."
-        # Додаємо метадані для кожної таблиці окремо, щоб уникнути помилок парсингу
-        loaded_at_field: "_UPDATED_AT"
+        arguments:
+          loaded_at_field: "_UPDATED_AT"
         columns:
           - name: candidate_id
             tests:
@@ -18,17 +18,19 @@ sources:
 
       - name: employees
         description: "Records of current and former staff members."
-        loaded_at_field: "_UPDATED_AT"
-        freshness:
-          warn_after: {count: 24, period: hour}
-          error_after: {count: 48, period: hour}
+        arguments:
+          loaded_at_field: "_UPDATED_AT"
+          freshness:
+            warn_after: {count: 24, period: hour}
+            error_after: {count: 48, period: hour}
 
       - name: interviews
         description: "Details of scheduled and completed job interviews."
-        loaded_at_field: "_UPDATED_AT"
-        freshness:
-          warn_after: {count: 12, period: hour}
-          error_after: {count: 24, period: hour}
+        arguments:
+          loaded_at_field: "_UPDATED_AT"
+          freshness:
+            warn_after: {count: 12, period: hour}
+            error_after: {count: 24, period: hour}
         columns:
           - name: id
             tests:
@@ -44,8 +46,10 @@ sources:
 
       - name: job_functions
         description: "Reference table defining various job roles."
-        loaded_at_field: "_UPDATED_AT"
+        arguments:
+          loaded_at_field: "_UPDATED_AT"
 
       - name: skills
         description: "A list of technical and soft skills."
-        loaded_at_field: "_UPDATED_AT"
+        arguments:
+          loaded_at_field: "_UPDATED_AT"

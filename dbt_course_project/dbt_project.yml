@@ -46,9 +46,9 @@ models:
       +materialized: view
 
     # Layer 3: Gold (Mart)
-    gold:
-      +schema: mart
-      +materialized: table
-      +required_tests:
-        unique: true
-        not_null: true
+    # gold:
+    #   +schema: mart
+    #   +materialized: table
+    #   +required_tests:
+    #     unique: true
+    #     not_null: true

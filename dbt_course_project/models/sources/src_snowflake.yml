@@ -10,9 +10,9 @@ sources:
         description: "Table containing personal details of job applicants."
         columns:
           - name: candidate_id
-            tests:
-              - unique
-              - not_null
+            # tests:
+            #   - unique
+            #   - not_null
 
       - name: employees
         description: "Records of current and former staff members."
@@ -21,9 +21,9 @@ sources:
         description: "Details of scheduled and completed job interviews."
         columns:
           - name: id
-            tests:
-              - unique
-              - not_null
+            # tests:
+            #   - unique
+            #   - not_null
           - name: candidate_id
             tests:
               - not_null

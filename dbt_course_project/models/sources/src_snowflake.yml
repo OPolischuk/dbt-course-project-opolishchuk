@@ -5,11 +5,11 @@ sources:
     description: "This database contains raw HR data imported from the source system."
     database: DBT_PROJECT
     schema: RAW
-    loaded_at_field: "TO_TIMESTAMP(_UPDATED_MICROS::bigint / 1000000)"
 
     tables:
       - name: candidates
         description: "Table containing personal details of job applicants."
+        loaded_at_field: "TO_TIMESTAMP(_UPDATED_MICROS::bigint / 1000000)"
         columns:
           - name: candidate_id
             tests:
@@ -18,12 +18,14 @@ sources:
 
       - name: employees
         description: "Records of current and former staff members."
+        loaded_at_field: "TO_TIMESTAMP(_UPDATED_MICROS::bigint / 1000000)"
         freshness:
           warn_after: {count: 1, period: hour}
           error_after: {count: 1000, period: day}
 
       - name: interviews
         description: "Details of scheduled and completed job interviews."
+        loaded_at_field: "TO_TIMESTAMP(_UPDATED_MICROS::bigint / 1000000)"
         freshness:
           warn_after: {count: 12, period: hour}
           error_after: {count: 24, period: hour}
@@ -36,8 +38,9 @@ sources:
             tests:
               - not_null
               - relationships:
-                  to: source('snowflake_raw', 'candidates')
-                  field: candidate_id
+                  arguments:
+                    to: source('snowflake_raw', 'candidates')
+                    field: candidate_id
 
       - name: job_functions
         description: "Reference table defining various job roles."

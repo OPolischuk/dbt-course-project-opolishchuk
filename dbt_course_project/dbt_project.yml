@@ -1,6 +1,5 @@
-# Name your project! Project names should contain only lowercase characters
-# and underscores. A good package name should reflect your organization's
-# name or the intended use of these models
+# dbt project name
+
 name: 'dbt_course_project'
 version: '1.0.0'
 
@@ -51,5 +50,5 @@ models:
       +schema: mart
       +materialized: table
       +required_tests:
-        unique: 1
-        not_null: 1
+        unique: true
+        not_null: true

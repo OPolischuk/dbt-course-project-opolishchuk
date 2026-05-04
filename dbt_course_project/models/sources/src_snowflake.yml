@@ -5,12 +5,6 @@ sources:
     description: "This database contains raw HR data imported from the source system."
     database: DBT_PROJECT
     schema: RAW
-    # Глобальне налаштування для всіх таблиць у цьому джерелі
-    loaded_at_field: "_UPDATED_AT"
-    freshness:
-      warn_after: {count: 24, period: hour}
-      error_after: {count: 48, period: hour}
-
     tables:
       - name: candidates
         description: "Table containing personal details of job applicants."

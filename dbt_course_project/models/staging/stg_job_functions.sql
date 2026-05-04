@@ -4,5 +4,14 @@ WITH base AS (
     {{ staging_model('job_functions') }}
 )
 
-SELECT * FROM base
-
+SELECT
+    *
+FROM base
+WHERE
+    -- only 19 symbols are passed
+    LENGTH(job_function_id) = 19
+-- deduplication
+QUALIFY ROW_NUMBER() OVER (
+    PARTITION BY job_function_id, updated_at
+    ORDER BY updated_at DESC
+) = 1

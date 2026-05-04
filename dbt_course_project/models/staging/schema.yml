@@ -2,6 +2,13 @@ version: 2
 
 models:
   - name: stg_interviews
+    description: "Staging model for interviews with full history preservation."
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - interview_id
+              - updated_at
     columns:
       - name: status
         tests:
@@ -22,12 +29,21 @@ models:
                 values: ['Technical', 'Project']
 
   - name: stg_candidates
+    description: "Staging model for candidates with full history preservation."
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - candidate_id
+              - updated_at
     columns:
       - name: english_level
         tests:
-          - dbt_utils.not_empty_string
+          - dbt_utils.not_empty_string:
+              arguments: {}
 
   - name: stg_job_functions
+    description: "Staging model for job functions with uniqueness check on ID and timestamp."
     tests:
       - dbt_utils.unique_combination_of_columns:
           arguments:
@@ -42,6 +58,7 @@ models:
                 value: 19
 
   - name: stg_skills
+    description: "Staging model for skills reference data."
     columns:
       - name: skill_id
         tests:

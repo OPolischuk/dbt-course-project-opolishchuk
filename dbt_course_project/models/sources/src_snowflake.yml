@@ -5,11 +5,15 @@ sources:
     description: "This database contains raw HR data imported from the source system."
     database: DBT_PROJECT
     schema: RAW
+    # Глобальне налаштування для всіх таблиць у цьому джерелі
+    loaded_at_field: "_UPDATED_AT"
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 48, period: hour}
+
     tables:
       - name: candidates
         description: "Table containing personal details of job applicants."
-        arguments:
-          loaded_at_field: "_UPDATED_AT"
         columns:
           - name: candidate_id
             tests:
@@ -18,19 +22,9 @@ sources:
 
       - name: employees
         description: "Records of current and former staff members."
-        arguments:
-          loaded_at_field: "_UPDATED_AT"
-          freshness:
-            warn_after: {count: 24, period: hour}
-            error_after: {count: 48, period: hour}
 
       - name: interviews
         description: "Details of scheduled and completed job interviews."
-        arguments:
-          loaded_at_field: "_UPDATED_AT"
-          freshness:
-            warn_after: {count: 12, period: hour}
-            error_after: {count: 24, period: hour}
         columns:
           - name: id
             tests:
@@ -46,10 +40,6 @@ sources:
 
       - name: job_functions
         description: "Reference table defining various job roles."
-        arguments:
-          loaded_at_field: "_UPDATED_AT"
 
       - name: skills
         description: "A list of technical and soft skills."
-        arguments:
-          loaded_at_field: "_UPDATED_AT"

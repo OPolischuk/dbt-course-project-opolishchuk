@@ -1,0 +1,8 @@
+models:
+  - name: dim_date
+    description: "Time spine table for MetricFlow"
+    time_spine:
+      standard_granularity_column: date
+    columns:
+      - name: date
+        granularity: day

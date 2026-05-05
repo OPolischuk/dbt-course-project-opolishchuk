@@ -5,6 +5,9 @@ profiles.yml
 
 # virtual env
 venv/
+mf_venv/
+mf_env/
+.venv/
 
 # folder with setup
 dbt/

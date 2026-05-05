@@ -1,4 +1,6 @@
-{{ config(materialized='table') }}
+{{ config(
+    materialized='table'
+) }}
 
 WITH date_spine AS (
     {{ dbt_utils.date_spine(
@@ -10,14 +12,14 @@ WITH date_spine AS (
 
 SELECT
     date_day AS date,
-    EXTRACT(year FROM date_day) AS year,
-    EXTRACT(quarter FROM date_day) AS quarter,
-    EXTRACT(month FROM date_day) AS month,
-    EXTRACT(day FROM date_day) AS day,
-    EXTRACT(week FROM date_day) AS week,
-    EXTRACT(dayofweek FROM date_day) AS day_of_week,
+    FALSE AS is_holiday,
+    EXTRACT(YEAR FROM date_day) AS year,
+    EXTRACT(QUARTER FROM date_day) AS quarter,
+    EXTRACT(MONTH FROM date_day) AS month,
+    EXTRACT(DAY FROM date_day) AS day,
+    EXTRACT(WEEK FROM date_day) AS week,
+    EXTRACT(DAYOFWEEK FROM date_day) AS day_of_week,
     TO_CHAR(date_day, 'Day') AS day_name,
     TO_CHAR(date_day, 'Month') AS month_name,
-    CASE WHEN EXTRACT(dayofweek FROM date_day) IN (0, 6) THEN TRUE ELSE FALSE END AS is_weekend,
-    FALSE AS is_holiday
+    COALESCE (EXTRACT(DAYOFWEEK FROM date_day) IN (0, 6), FALSE) AS is_weekend
 FROM date_spine

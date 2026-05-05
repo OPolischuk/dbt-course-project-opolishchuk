@@ -1,0 +1,40 @@
+metrics:
+  - name: total_interviews
+    label: Total Interviews
+    type: simple
+    type_params:
+      measure: interview_count
+
+  - name: total_duration_metric
+    label: Total Duration
+    type: simple
+    type_params:
+      measure: total_duration
+
+  - name: total_feedback_delay_metric
+    label: Total Feedback Delay
+    type: simple
+    type_params:
+      measure: total_feedback_delay
+
+  - name: avg_interview_duration
+    label: Average Interview Duration (min)
+    type: ratio
+    type_params:
+      numerator: total_duration_metric
+      denominator: total_interviews
+
+  - name: avg_feedback_delay
+    label: Average Feedback Delay (min)
+    type: ratio
+    type_params:
+      numerator: total_feedback_delay_metric
+      denominator: total_interviews
+
+  - name: completed_interviews
+    label: Completed Interviews
+    type: simple
+    filter: |
+      {{ Dimension('interview__status') }} = 'COMPLETED'
+    type_params:
+      measure: interview_count

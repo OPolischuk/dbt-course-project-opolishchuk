@@ -1,0 +1,33 @@
+semantic_models:
+  - name: semantic_interviews
+    model: ref('fct_interview')
+    defaults:
+      agg_time_dimension: created_date
+    entities:
+      - name: interview
+        type: primary
+        expr: id
+      - name: candidate
+        type: foreign
+        expr: candidate_offset
+    dimensions:
+      - name: created_date
+        type: time
+        type_params:
+          time_granularity: day
+      - name: status
+        type: categorical
+      - name: english_level
+        type: categorical
+      - name: candidate_type
+        type: categorical
+    measures:
+      - name: interview_count
+        expr: 1
+        agg: sum
+      - name: total_duration
+        expr: interview_duration
+        agg: sum
+      - name: total_feedback_delay
+        expr: feedback_delay
+        agg: sum

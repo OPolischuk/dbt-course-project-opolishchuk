@@ -1,0 +1,13 @@
+saved_queries:
+  - name: candidate_experience_insight
+    label: Candidate Experience Analysis
+    description: Analyzes candidate interview experience across English levels over time
+    query_params:
+      metrics:
+        - total_interviews
+        - avg_interview_duration
+        - avg_feedback_delay
+        - completed_interviews
+      group_by:
+        - "Dimension('interview__english_level')"
+        - "TimeDimension('metric_time', 'day')"
